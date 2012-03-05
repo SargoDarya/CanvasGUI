@@ -65,12 +65,7 @@ GUI.Manager.prototype.clean = function()
  * @return void
  */
 GUI.Manager.prototype.injectMouseMove = function(evt)
-{
-  if(evt.which === 50) {
-    evt.stopImmediatePropagation();
-    evt.preventDefault();
-  }
-  
+{ 
   this._mouse.injectMoveEvent(evt);
   
   // Update because of cursor
@@ -85,7 +80,7 @@ GUI.Manager.prototype.injectMouseMove = function(evt)
  * @param {MouseEvent}, evt
  * @return void
  */
-GUI.Manager.prototype.injectMouseClick = function(evt)
+GUI.Manager.prototype.injectMouseDown = function(evt)
 {
   var pos = this._mouse.position();
   var p = new GUI.Point(pos.x, pos.y);
@@ -104,6 +99,40 @@ GUI.Manager.prototype.injectKeyDown = function(evt)
   }
 };
 
+/**
+ * Keyup Handler
+ * @param {KeyboardEvent}, evt
+ * @return void
+ */
+GUI.Manager.prototype.injectKeyUp = function(evt)
+{
+  if(this._focus && this._focus.handleKeyUp) {
+    this._focus.handleKeyUp(evt)
+  }
+};
+
+/**
+ * Bind events
+ * @param {KeyboardEvent}, evt
+ * @return void
+ */
+GUI.Manager.prototype.bindEvents = function()
+{
+  var self = this;
+  var fnc = (document.addEventListener) ? 'addEventListener' : 'attachEvent';
+  document[fnc]('keydown', function(evt) { 
+    self.injectKeyDown(evt); 
+  });
+  document[fnc]('keyup', function(evt) { 
+    self.injectKeyUp(evt); 
+  });
+  document[fnc]('mousedown', function(evt) { 
+    self.injectMouseDown(evt); 
+  });
+  document[fnc]('mousemove', function(evt) { 
+    self.injectMouseMove(evt); 
+  });
+};
 
 /**
  * Render the GUI
