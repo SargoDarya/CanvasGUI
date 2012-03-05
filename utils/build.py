@@ -18,6 +18,7 @@ COMMON_FILES = [
 'Geom/Rect.js',
 'Display/DisplayObject.js',
 'Display/Sprite.js',
+'Display/SVGSprite.js',
 'Display/Window.js',
 'Display/Mouse.js',
 'Display/TextLabel.js',
@@ -27,7 +28,7 @@ COMMON_FILES = [
 ]
 
 UTILS_FILES = [
-	'Utils/Assert.js'
+'Utils/Assert.js'
 ]
 
 def merge(files):

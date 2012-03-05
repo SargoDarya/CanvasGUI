@@ -245,6 +245,11 @@ GUI.DisplayObject.prototype.render = function()
       this._children[i].render();
     }
   }
+  if(GUI.Display.debug === true) {
+    var pos = GUI.Display.getTLPosition(this);
+    this._ctx.strokeStyle = '1px solid red';
+    this._ctx.strokeRect(pos.x, pos.y, this._size.width, this._size.height);
+  };
   this._hasDirty = false;
   this._dirty = false;
 };

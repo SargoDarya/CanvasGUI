@@ -1,5 +1,7 @@
 GUI.Display = {};
 
+GUI.Display.debug = false;
+
 GUI.Display.dirtyRectangles = [];
 
 // Instanciate GUI Manager

@@ -1,1 +1,2 @@
 var GUI;
+var canvg;
