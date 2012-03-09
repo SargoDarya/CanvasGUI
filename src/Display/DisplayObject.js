@@ -252,7 +252,7 @@ GUI.DisplayObject.prototype.render = function()
   };
   this._hasDirty = false;
   this._dirty = false;
-};
+};  
 
 /**
  * Invalidates the current Rect
