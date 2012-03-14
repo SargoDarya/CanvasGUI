@@ -97,8 +97,12 @@ GUI.DisplayObject.prototype.isVisible = function(visibility)
  */
 GUI.DisplayObject.prototype.size = function(width, height) 
 {
-  if(width) this._size.width = width;
-  if(height) this._size.height = height;
+  if(width) {
+    this._size.width = width;
+    this._size.height = height;
+    this.invalidateRect();
+  }
+  
   return {
     width: this._size.width,
     height: this._size.height

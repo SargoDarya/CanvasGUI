@@ -43,10 +43,11 @@ GUI.Manager.prototype.setSize = function(w, h)
   this._ctx.canvas.width = w;
   this._ctx.canvas.height = h;
   
-  this._stage.size(this._size.x, this._size.y);
+  this._stage.size(w, h);
   this._stage.redraw();
   
-  GUI.Display.dirtyRectangles.push(new GUI.Rect({width: w, height: h}, {x: 0, y: 0}));
+  this._stage.invalidateRect();
+  //GUI.Display.dirtyRectangles.push(new GUI.Rect({width: w, height: h}, {x: 0, y: 0}));
 };
 
 /**
@@ -121,7 +122,7 @@ GUI.Manager.prototype.bindEvents = function()
   var self = this;
   var fnc = (document.addEventListener) ? 'addEventListener' : 'attachEvent';
   document[fnc]('keydown', function(evt) { 
-    self.injectKeyDown(evt); 
+    self.injectKeyDown(evt);
   });
   document[fnc]('keyup', function(evt) { 
     self.injectKeyUp(evt); 

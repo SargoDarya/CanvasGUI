@@ -3,6 +3,7 @@ GUI.TextInput = function() {
   this._backgroundColor = "rgba(255, 255, 255, 0.7)";
   this._caretColor = "#000000";
   this._caretIndex = 0;
+  this._dirty = true;
   this._clearOnEnter = true;
   this._enterCallback = null;
 };
