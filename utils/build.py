@@ -24,6 +24,8 @@ COMMON_FILES = [
 'Display/TextLabel.js',
 'Display/TextInput.js',
 'Display/TextArea.js',
+'Utils/AjaxHelper.js',
+'Utils/SpriteFrameCache.js',
 'Display.js'
 ]
 

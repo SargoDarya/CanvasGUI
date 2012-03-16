@@ -1,5 +1,8 @@
 GUI.Sprite = function() {
   GUI.DisplayObject.call(this);
+  
+  this.image = null;
+  this.spriteFrame = null;
 };
 
 GUI.Sprite.prototype = new GUI.DisplayObject;
@@ -23,6 +26,17 @@ GUI.Sprite.prototype.fromPath = function(path)
   this.image.src = path;
 };
 
+GUI.Sprite.prototype.fromSpriteFrame = function(frameName)
+{
+  var spriteFrame = GUI.SpriteFrameCache.getSpriteFrame(frameName);
+  
+  if(spriteFrame) {
+    this.spriteFrame = spriteFrame;
+    this.image = spriteFrame.texture;
+    this.size(spriteFrame.sourceSize.w, spriteFrame.sourceSize.h);
+  }
+};
+
 GUI.Sprite.prototype.remoteLoadHandler = function(evt) 
 {
   this.isVisible(true);
@@ -33,7 +47,13 @@ GUI.Sprite.prototype.remoteLoadHandler = function(evt)
 GUI.Sprite.prototype.render = function() 
 {
   var pos = GUI.Display.getTLPosition(this);
-  this._ctx.drawImage(this.image, pos.x, pos.y);
+  if(this.spriteFrame) {
+    var f = this.spriteFrame;
+    this._ctx.drawImage(this.image, f.frame.x, f.frame.y, f.frame.w, f.frame.h,
+      pos.x, pos.y, this._size.width, this._size.height);
+  } else {
+    this._ctx.drawImage(this.image, pos.x, pos.y);
+  }
 
   this._dirty = false;
   
