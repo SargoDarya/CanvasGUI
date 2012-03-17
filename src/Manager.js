@@ -19,6 +19,8 @@ GUI.Manager = function(){
   this._stage.size(this._size.x, this._size.y);
   
   this._mouse = new GUI.Mouse();
+  this._mouseFocus = null;
+  this._mouseDownFocus = null;
   
 };
 
@@ -74,10 +76,27 @@ GUI.Manager.prototype.injectMouseMove = function(evt)
   var rp = GUI.Display.getTLPosition(this._mouse._cursor);
   r.position(rp.x, rp.y);
   this._stage.redrawRect(r);
+  
+  var pos = this._mouse.position();
+  var p = new GUI.Point(pos.x, pos.y);
+  var child = this._stage.getChildAtPoint(p);
+  
+  // trigger mouse out event
+  if(this._mouseFocus != child) {
+    if(this._mouseFocus != null &&
+       typeof this._mouseFocus.mouseOutHandler === 'function') {
+      this._mouseFocus.mouseOutHandler();
+    }
+  }
+  
+  if(child && child.mouseOverHandler) {
+    this._mouseFocus = child;
+    child.mouseOverHandler(evt);
+  }
 };
 
 /**
- * Mouse Click Handler
+ * Mouse Down Handler
  * @param {MouseEvent}, evt
  * @return void
  */
@@ -86,6 +105,22 @@ GUI.Manager.prototype.injectMouseDown = function(evt)
   var pos = this._mouse.position();
   var p = new GUI.Point(pos.x, pos.y);
   this._focus = this._stage.getChildAtPoint(p);
+  if(this._focus && this._focus.mouseDownHandler) {
+    this._focus.mouseDownHandler(evt);
+  }
+};
+
+/**
+ * Mouse Up Handler
+ * @param {MouseEvent}, evt
+ * @return void
+ */
+GUI.Manager.prototype.injectMouseUp = function(evt)
+{
+  var pos = this._mouse.position();
+  if(this._focus && this._focus.mouseUpHandler) {
+    this._focus.mouseUpHandler(evt);
+  }
 };
 
 /**
@@ -129,6 +164,9 @@ GUI.Manager.prototype.bindEvents = function()
   });
   document[fnc]('mousedown', function(evt) { 
     self.injectMouseDown(evt); 
+  });
+  document[fnc]('mouseup', function(evt) { 
+    self.injectMouseUp(evt); 
   });
   document[fnc]('mousemove', function(evt) { 
     self.injectMouseMove(evt); 

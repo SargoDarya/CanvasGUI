@@ -15,7 +15,7 @@ GUI.Mouse = function()
 GUI.Mouse.prototype.createDisplayObject = function()
 {
   this._cursor = new GUI.Sprite();
-  this._cursor.fromPath('ui/cursor.png');
+  //this._cursor.fromPath('ui/cursor.png');
   this._cursor.anchorPoint(0, 1);
   this._cursor.tag('mouse');
 };
