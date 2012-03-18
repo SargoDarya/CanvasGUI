@@ -39,7 +39,9 @@ GUI.Button.prototype.mouseDownHandler = function(evt)
 GUI.Button.prototype.mouseUpHandler = function(evt)
 {
   this._dirty = true;
-  this.spriteFrame = this._mouseOverFrame;
+  if(this.spriteFrame != this._defaultFrame) {
+    this.spriteFrame = this._mouseOverFrame;
+  }
   this.invalidateRect();
 };
 

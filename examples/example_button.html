@@ -36,19 +36,24 @@
 			button.anchorPoint(0.5, 0.5);
 			
 			guiManager.addChild(button);
-			
+			guiManager.render();
 		});
     
-    function render() {
+    document.addEventListener('mousemove', function(e){
+      guiManager.injectMouseMove(e);
       guiManager.render();
-      requestAnimationFrame(render);
-    }
+    });
     
-    requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||  
-                        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-
-    render();
-		
+    document.addEventListener('mouseup', function(e){
+      guiManager.injectMouseUp(e);
+      guiManager.render();
+    });
+    
+    document.addEventListener('mousedown', function(e){
+      guiManager.injectMouseDown(e);
+      guiManager.render();
+    });
+    
 	</script>
 	
 </body>
