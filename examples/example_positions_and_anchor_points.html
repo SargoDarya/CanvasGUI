@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Basic Demo</title>
+	<link rel="stylesheet" href="example_styles.css" />
+	<script src="../build/CanvasGUI.js"></script>
+</head>
+
+<body>
+	
+	<script>
+		// Shorthand for the GUI
+		var guiManager = GUI.Display.Manager;
+		guiManager.setSize(window.innerWidth, window.innerHeight);
+
+		// Append the DOM element
+		document.body.appendChild(guiManager.domElement);
+
+		// Create a new TextLabel element and add it to the stage
+		var blLabel = new GUI.TextLabel();
+		blLabel.position(0, 0.02);
+		blLabel.anchorPoint(0, 0);
+		blLabel.text('Pos.: 0,0 Anchor: 0,0');
+		guiManager.addChild(blLabel);
+
+		// Create a new TextLabel element and add it to the stage
+		var brLabel = new GUI.TextLabel();
+		brLabel.position(1, 0.02);
+		brLabel.anchorPoint(1, 0);
+		brLabel.text('Pos.: 1,0 Anchor: 1,0');
+		guiManager.addChild(brLabel);
+
+		// Create a new TextLabel element and add it to the stage
+		var tlLabel = new GUI.TextLabel();
+		tlLabel.position(0, 1);
+		tlLabel.anchorPoint(0, 0);
+		tlLabel.text('Pos.: 0,1 Anchor: 0,1');
+		guiManager.addChild(tlLabel);
+
+		// Create a new TextLabel element and add it to the stage
+		var trLabel = new GUI.TextLabel();
+		trLabel.position(1, 1);
+		trLabel.anchorPoint(1, 1);
+		trLabel.text('Pos.: 1,1 Anchor: 1,1');
+		guiManager.addChild(trLabel);
+		
+		// Create a new TextLabel element and add it to the stage
+		var centerLabel = new GUI.TextLabel();
+		centerLabel.position(0.5, 0.5);
+		centerLabel.anchorPoint(0.5, 0.5);
+		centerLabel.text('Pos.: 0.5,0.5 Anchor: 0.5, 0.5');
+		guiManager.addChild(centerLabel);
+
+		// Render changed things
+		guiManager.render();
+	</script>
+	
+</body>
+
+</html>

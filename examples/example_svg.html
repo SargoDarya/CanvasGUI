@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Basic Demo</title>
+	<link rel="stylesheet" href="example_styles.css" />
+	<script src="../src/Utils/canvg.js"></script>
+	<script src="../src/Utils/rgbcolor.js"></script>
+	<script src="../build/CanvasGUI.js"></script>
+	<script src="../src/Display/SVGSprite.js"></script>
+</head>
+
+<body>
+
+	<script>
+		// Shorthand for the GUI
+		var guiManager = GUI.Display.Manager;
+		guiManager.setSize(window.innerWidth, window.innerHeight);
+
+		// Append the DOM element
+		document.body.appendChild(guiManager.domElement);
+
+		// Create a new TextLabel element and add it to the stage
+		var svgSprite = new GUI.SVGSprite('assets/Tux.svg');
+		svgSprite.position(0.5, 0.5);       // Center on Stage
+		svgSprite.anchorPoint(0.5, 0.5);    // Put anchor to center
+		guiManager.addChild(svgSprite);
+
+		// Render changed things
+		guiManager.render();
+	</script>
+
+</body>
+
+</html>

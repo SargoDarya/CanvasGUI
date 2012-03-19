@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Basic Demo</title>
+	
+	<META HTTP-EQUIV="Cache-Control" CONTENT="max-age=0">
+	<META HTTP-EQUIV="Cache-Control" CONTENT="no-cache">
+	<META http-equiv="expires" content="0">
+	<META HTTP-EQUIV="Expires" CONTENT="Tue, 01 Jan 1980 1:00:00 GMT">
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+		
+	<link rel="stylesheet" href="example_styles.css" />
+	<script src="../build/CanvasGUI.js"></script>
+</head>
+
+<body>
+	
+	<script>
+	
+	
+	
+		var guiManager = GUI.Display.Manager;
+		guiManager.setSize(window.innerWidth, window.innerHeight);
+		guiManager.bindEvents();
+		document.body.appendChild(guiManager.domElement);
+		
+	  var sprite = new GUI.Sprite();
+	  var sprite2 = new GUI.Sprite();
+		
+		// Read File into SpriteFrameCache
+		GUI.SpriteFrameCache.spritesFromFile('assets/CommandButtons.json', function(){
+			sprite.fromSpriteFrame('BTNAcolyte.tga');
+			sprite.position(0.5, 0.5);
+			sprite.anchorPoint(0.5, 0.5);
+			
+			sprite2.fromSpriteFrame("BTNArchimonde.tga");
+			sprite2.position(0.3, 0.5);
+			sprite2.anchorPoint(0.5, 0.5);
+			
+			guiManager.addChild(sprite);
+			guiManager.addChild(sprite2);
+			guiManager.render();
+		});
+		
+	</script>
+	
+</body>
+
+</html>
