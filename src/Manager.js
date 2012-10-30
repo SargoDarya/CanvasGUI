@@ -104,10 +104,15 @@ GUI.Manager.prototype.injectMouseDown = function(evt)
 {
   var pos = this._mouse.position();
   var p = new GUI.Point(pos.x, pos.y);
-  this._focus = this._stage.getChildAtPoint(p);
-  if(this._focus && this._focus.mouseDownHandler) {
-    this._focus.mouseDownHandler(evt);
+  
+  var focusElement = this._stage.getChildAtPoint(p);
+  if(focusElement) {
+    focusElement.focus();
+    if(focusElement.mouseDownHandler) {
+      focusElement.mouseDownHandler(evt, p);
+    }
   }
+  this.render();
 };
 
 /**
@@ -188,4 +193,26 @@ GUI.Manager.prototype.render = function()
 
   this._stage.render();
   GUI.Display.dirtyRectangles = [];
+};
+
+
+/**
+ * Gives and removes focus from elements
+ * @return bool
+ */
+GUI.Manager.prototype.focus = function(focusElement) {
+  // check if element releases focus
+  if(this._focus && !this._focus.releaseFocus()) {
+    return false;
+  } 
+  
+  this._focus = null;
+  
+  if(focusElement) {
+    this._focus = focusElement;
+    focusElement._focus = true;
+    focusElement.isDirty();
+  }
+  
+  return true;
 };

@@ -1,5 +1,5 @@
 GUI.AjaxHelper = function(obj) {
-	var xhr = new XMLHttpRequest();
+	var xhr = (XMLHttpRequest) ? new XMLHttpRequest : new ActiveXObject("Microsoft.XMLHTTP");
   var length = 0;
 
   var url = obj.url || null;
@@ -12,9 +12,13 @@ GUI.AjaxHelper = function(obj) {
 		if ( xhr.readyState === xhr.DONE ) {
 			if ( xhr.status === 200 || xhr.status === 0 ) {
 				if ( xhr.responseText ) {
-					var json = JSON.parse( xhr.responseText );
+          var data = xhr.responseText;
+          if(obj.type == 'json') {
+            data = JSON.parse( data );
+          }
+
 					if(callbackSuccess) {
-					  callbackSuccess(json);
+					  callbackSuccess(data);
 					}
 				} else {
 					console.warn( "CanvasGUI: [" + url + "] seems to be unreachable or file there is empty" );
@@ -35,7 +39,7 @@ GUI.AjaxHelper = function(obj) {
 	};
   
   xhr.open("GET", url, true);
-	if ( xhr.overrideMimeType ) xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+	if ( xhr.overrideMimeType && obj.overrideMimeType ) xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
 	xhr.setRequestHeader( "Content-Type", "text/plain" );
 	xhr.send( null );
 	

@@ -17,11 +17,13 @@ GUI.SpriteFrameCache.spritesFromFile = function(jsonFile, callback)
   
   GUI.AjaxHelper({
     url: jsonFile,
-    onSuccess: parseFile
+    onSuccess: parseFile,
+    type: 'json'
   });
 };
 
-GUI.SpriteFrameCache.getSpriteFrame = function(spriteName) {
+GUI.SpriteFrameCache.getSpriteFrame = function(spriteName) 
+{
   for(var i=0; i<GUI.SpriteFrameCache._frameFiles.length; i++) {
     var file = GUI.SpriteFrameCache._frameFiles[i];
     if(file.frames[spriteName]) {
@@ -32,4 +34,9 @@ GUI.SpriteFrameCache.getSpriteFrame = function(spriteName) {
   }
   
   return null;
+};
+
+GUI.SpriteFrameCache.addSpriteFrameFile = function(spriteFrameFile)
+{
+  GUI.SpriteFrameCache._frameFiles.push(spriteFrameFile);
 };

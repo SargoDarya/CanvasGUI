@@ -29,6 +29,9 @@ GUI.DisplayObject = function(){
   /** Instancing */
   this._tag = "";
   this._ctx = null;
+  
+  /** Focus handling */
+  this._focus = false;
 };
 
 /**
@@ -284,4 +287,23 @@ GUI.DisplayObject.prototype.invalidateRect = function()
 
   GUI.Display.dirtyRectangles.push(r);
   return r;
+};
+
+/**
+ * Sets the Focus to the current object
+ */
+GUI.DisplayObject.prototype.focus = function() 
+{
+  if(this._focus == false) {
+    GUI.Display.Manager.focus(this);
+  }
+};
+
+/**
+ * Releases the focus
+ */
+GUI.DisplayObject.prototype.releaseFocus = function()
+{
+  this._dirty = true;
+  return true;
 };

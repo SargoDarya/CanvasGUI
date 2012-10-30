@@ -1,5 +1,8 @@
 GUI.Display = {};
 
+// Active Skin (CEGUI Skin)
+GUI.Display.activeSkin = null;
+
 GUI.Display.debug = false;
 
 GUI.Display.dirtyRectangles = [];
@@ -31,7 +34,7 @@ GUI.Display.getTLPosition = function(obj)
   var parentOffset = {x: 0, y: 0};
   
   if(obj._parent) {
-    var parentOffset = GUI.Display.getTLPosition(obj._parent);
+    parentOffset = GUI.Display.getTLPosition(obj._parent);
   }
 
   var position = GUI.Display.getDenormalizedPosition(obj._position.x, obj._position.y);

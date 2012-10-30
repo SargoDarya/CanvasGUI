@@ -32,7 +32,9 @@ UTILS_FILES = [
 'Utils/Assert.js',
 'Utils/Draggable.js',
 'Utils/AjaxHelper.js',
-'Utils/SpriteFrameCache.js'
+'Utils/SpriteFrameCache.js',
+'Utils/CEGUI/CEGUISkin.js',
+#'Utils/CEGUI/CEGUISkinParser.js'
 ]
 
 def merge(files):
